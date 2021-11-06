@@ -1,3 +1,15 @@
 <canvas id="canvas"> </canvas>
-
-<h1>{{ width }} {{ height }}</h1>
+<div class="child" #child>
+  <div class="text">
+    its a sample tex for {{ data?.value }}its a sample tex for
+    {{ data?.value }}its a sample tex for {{ data?.value }}its a sample tex for
+    {{ data?.value }}its a sample tex for {{ data?.value }}its a sample tex for
+    {{ data?.value }}its a sample tex for {{ data?.value }}its a sample tex for
+    {{ data?.value }}its a sample tex for {{ data?.value }}its a sample tex for
+    {{ data?.value }}its a sample tex for {{ data?.value }}
+  </div>
+  <div class="btn-row">
+    <div class="btn next" (click)="onNext()">next</div>
+    <div class="btn close" (click)="onCancle()">cancle</div>
+  </div>
+</div>

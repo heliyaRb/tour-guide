@@ -1,7 +1,12 @@
 .parent {
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 100%;
+
+  p {
+    position: absolute;
+    bottom: 0;
+  }
 
   .item-1,
   .item-2,
@@ -39,7 +44,7 @@
 
   .item-5 {
     background-color: tomato;
-    top: 50%;
+    top: 60%;
     right: 50%;
   }
 }
@@ -52,4 +57,10 @@
 ::ng-deep mat-dialog-container {
   padding: 0 !important;
   background-color: transparent !important;
+}
+
+::ng-deep {
+  .cdk-overlay-dark-backdrop {
+    background: none !important;
+  }
 }
