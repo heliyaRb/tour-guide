@@ -105,15 +105,15 @@ export class TestComponent implements OnInit {
     context.globalAlpha = 0.6;
     context.fillStyle = '#01806b';
     const backgroundPath = new Path2D();
-    let controlY = this.height - 100;
+    let controlY = this.height - 30;
     backgroundPath.moveTo(0, 0);
     backgroundPath.lineTo(this.width, 0);
-    backgroundPath.lineTo(this.width, this.height * 0.7);
+    backgroundPath.lineTo(this.width, this.height * 0.8);
     backgroundPath.quadraticCurveTo(
       this.width / 2,
       controlY,
       0,
-      this.height * 0.7
+      this.height * 0.8
     );
 
     backgroundPath.closePath();
