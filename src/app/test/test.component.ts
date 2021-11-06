@@ -15,7 +15,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class TestComponent implements OnInit {
   width = 0;
   height = 0;
+  percentageOfHeight = 0.8;
   @ViewChild('child') child: any;
+
+  get halfHeight() {
+    return this.height / 2;
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,8 +37,8 @@ export class TestComponent implements OnInit {
     // right side of page
     if (this.data.position.left > this.width / 2) {
       console.log(this.data.position.left, this.width / 2, 'right');
-      if (this.data.position.top > this.height / 2) {
-        console.log(this.data.position.top, this.height / 2, 'bottom');
+      if (this.data.position.top > this.halfHeight) {
+        console.log(this.data.position.top, this.halfHeight, 'bottom');
         this.child.nativeElement.setAttribute(
           'style',
           `right:${
@@ -43,7 +48,7 @@ export class TestComponent implements OnInit {
           }px`
         );
       } else {
-        console.log(this.data.position.top, this.height / 2, 'top');
+        console.log(this.data.position.top, this.halfHeight, 'top');
         this.child.nativeElement.setAttribute(
           'style',
           `right:${
@@ -58,8 +63,8 @@ export class TestComponent implements OnInit {
     // left side of page
     if (this.data.position.left <= this.width / 2) {
       console.log(this.data.position.left, this.width / 2, 'left');
-      if (this.data.position.top > this.height / 2) {
-        console.log(this.data.position.top, this.height / 2, 'bottom');
+      if (this.data.position.top > this.halfHeight) {
+        console.log(this.data.position.top, this.halfHeight, 'bottom');
         this.child.nativeElement.setAttribute(
           'style',
           `left:${this.data.position.left}px;max-width:${
@@ -67,7 +72,7 @@ export class TestComponent implements OnInit {
           }px;bottom:${this.data.position.top - this.data.item.height}px`
         );
       } else {
-        console.log(this.data.position.top, this.height / 2, 'top');
+        console.log(this.data.position.top, this.halfHeight, 'top');
         this.child.nativeElement.setAttribute(
           'style',
           `left:${this.data.position.left}px;max-width:${
@@ -91,29 +96,36 @@ export class TestComponent implements OnInit {
   doBackDrop(context: CanvasRenderingContext2D) {
     context.globalAlpha = 0.6;
     context.fillStyle = '#A8A8A8';
+    let controlY = this.height - 30;
     const backgroundPath = new Path2D();
-    backgroundPath.moveTo(0, 0);
-    backgroundPath.lineTo(0, this.height);
+    backgroundPath.moveTo(0, this.height * this.percentageOfHeight);
+    backgroundPath.quadraticCurveTo(
+      this.width / 2,
+      controlY,
+      this.width,
+      this.height * this.percentageOfHeight
+    );
     backgroundPath.lineTo(this.width, this.height);
-    backgroundPath.lineTo(this.width, 0);
+    backgroundPath.lineTo(0, this.height);
+
     backgroundPath.closePath();
     context.fill(backgroundPath);
     context.globalAlpha = 1;
   }
 
   doDraw(context: CanvasRenderingContext2D) {
-    context.globalAlpha = 0.6;
+    context.globalAlpha = 0.9;
     context.fillStyle = '#01806b';
     const backgroundPath = new Path2D();
     let controlY = this.height - 30;
     backgroundPath.moveTo(0, 0);
     backgroundPath.lineTo(this.width, 0);
-    backgroundPath.lineTo(this.width, this.height * 0.8);
+    backgroundPath.lineTo(this.width, this.height * this.percentageOfHeight);
     backgroundPath.quadraticCurveTo(
       this.width / 2,
       controlY,
       0,
-      this.height * 0.8
+      this.height * this.percentageOfHeight
     );
 
     backgroundPath.closePath();
