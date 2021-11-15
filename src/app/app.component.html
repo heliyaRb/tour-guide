@@ -1,9 +1,5 @@
 <div class="parent">
-  <div class="item-1">item-1</div>
-  <div class="item-2">item-2</div>
-  <div class="item-3">item-3</div>
-  <div class="item-4" #item>item-4</div>
-  <div class="item-5">item-5</div>
+  <div *ngFor="let item of items" [class]="item" #item>{{ item }}</div>
   <p>
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure quaerat saepe
     laboriosam non porro doloribus molestias quidem delectus mollitia illo in

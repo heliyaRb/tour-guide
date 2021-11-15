@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'tour-test';
   itemHeight: number = 0;
   itemWidth: number = 0;
-  items: string[] = ['.item-1', '.item-2', '.item-3', '.item-4', '.item-5'];
+  items: string[] = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
   curentItem: number = 0;
 
   @ViewChild('item') item: any;
@@ -25,7 +25,7 @@ export class AppComponent {
   }
 
   findItem(currenvtItem: number) {
-    let div = document.querySelector(this.items[currenvtItem]);
+    let div = document.querySelector(`.${this.items[currenvtItem]}`);
     let divOffset = this.offset(div);
     this.itemWidth = this.item.nativeElement.offsetWidth;
     this.itemHeight = this.item.nativeElement.offsetHeight;
@@ -45,8 +45,10 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result?.onNext == true) {
-        this.curentItem++;
-        this.findItem(this.curentItem);
+        if (this.curentItem < this.items.length) {
+          this.curentItem++;
+          this.findItem(this.curentItem);
+        }
       }
     });
   }
